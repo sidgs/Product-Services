@@ -1,6 +1,8 @@
 #Product-Services
 Import as a maven project.
-Change version of java according to the system in pom.xml
+
+Change version of java according to the system in pom.xml.
+
 Change the jdbc password in application.properties
 
 Create 4 tables in Mysql:
