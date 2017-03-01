@@ -33,7 +33,7 @@ public class ProviderController {
     @RequestMapping(value = "/provider")
     public ModelAndView listProvider(ModelAndView model) throws IOException {
         List<Provider> listProvider = providerService.getAllProviders();
-        model.addObject("listprovider", listProvider);
+        model.addObject("listProvider", listProvider);
         model.setViewName("providerHome");
         return model;
     }
