@@ -12,12 +12,14 @@
     <div align="center">
         <h1>Service List</h1>
         <h3>
-            <a href="newService">New Service</a>
+            <a href="newService">New service</a>
         </h3>
         <table border="1">
 
-            <th>service_id</th>
+            <th>id</th>
             <th>service_name</th>
+            <th>service_id</th>
+
             <th>Action</th>
 
 
@@ -25,12 +27,13 @@
                 <tr>
 
                     <td>${service.id}</td>
-                    <td>${service.name}</td>
+                    <td>${service.service_name}</td>
+                    <td>${service.service_id}</td>
 
 
                     <td> <a href="editService?id=${service.id}">Edit</a>
 
-                         <a href="deleteService?id=${member.id}">Delete</a>
+                         <a href="deleteService?id=${service.id}">Delete</a>
                     </td>
 
                 </tr>

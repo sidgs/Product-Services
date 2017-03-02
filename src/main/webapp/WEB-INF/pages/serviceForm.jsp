@@ -12,8 +12,6 @@
         <form:form action="saveService" method="post" modelAttribute="service">
         <table>
 
-
-
             <tr>
                 <td>ServiceId:</td>
                 <td><form:input path="service_id" /></td>

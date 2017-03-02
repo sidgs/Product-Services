@@ -4,29 +4,39 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by saimanu.manoj on 23-02-2017.
+ * Created by Shylaja on 2/23/2017.
  */
+
 @Entity
-@Table(name = "services")
+@Table(name ="service")
 public class Service implements Serializable {
 
-    private static final long serialVersionUID = -3465813074586302847L;
+    private static final long serialVersionUID = -3453356565566655L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int service_Id;
-
-    public int getService_id() {
-        return service_Id;
-    }
-
-    public void setService_id(int service_Id) {
-        this.service_Id = service_Id;
-    }
+    private int id;
 
     @Column
-
     private String service_name;
+
+    @Column
+    private String service_id;
+
+
+
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getService_name() {
         return service_name;
@@ -36,21 +46,15 @@ public class Service implements Serializable {
         this.service_name = service_name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Service service = (Service) o;
-
-        if (service_Id != service.service_Id) return false;
-        return service_name != null ? service_name.equals(service.service_name) : service.service_name == null;
+    public String getService_id() {
+        return service_id;
     }
 
-    @Override
-    public int hashCode() {
-        int result = service_Id;
-        result = 31 * result + (service_name != null ? service_name.hashCode() : 0);
-        return result;
+    public void setService_id(String service_id) {
+        this.service_id = service_id;
     }
+
+
+
+
 }

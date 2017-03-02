@@ -1,7 +1,10 @@
 package com.sidgs.controller;
 
-import com.sidgs.service.ServiceService;
+
+
 import com.sidgs.model.Service;
+import com.sidgs.service.ServiceService;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,37 +15,31 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-import org.jboss.logging.Logger;
-//import java.util.logging.Logger;
 
 /**
- * Created by saimanu.manoj on 23-02-2017.
+ * Created by Shylaja on 2/26/2017.
  */
 @Controller
 public class ServiceController {
 
-
     private static final Logger logger = Logger.getLogger(ServiceController.class);
-
     public ServiceController(){
-        System.out.println("ServiceController");
+        System.out.println("ServiceController()");
     }
 
     @Autowired
     private ServiceService serviceService;
-    //@RequestMapping(value="/")
-    //public ModelAndView
 
-    @RequestMapping(value = "/service" )
-    public ModelAndView listServices(ModelAndView model) throws IOException {
+    @RequestMapping(value = "/service")
+    public ModelAndView listService(ModelAndView model) throws IOException {
         List<Service> listService = serviceService.getAllServices();
-        model.addObject("listServices", listService);
+        model.addObject("listService", listService);
         model.setViewName("serviceHome");
         return model;
     }
 
     @RequestMapping(value = "/newService", method = RequestMethod.GET)
-    public ModelAndView newContact(ModelAndView model) {
+    public ModelAndView newService(ModelAndView model){
         Service service = new Service();
         model.addObject("service", service);
         model.setViewName("serviceForm");
@@ -51,32 +48,34 @@ public class ServiceController {
 
     @RequestMapping(value = "/saveService", method = RequestMethod.POST)
     public ModelAndView saveService(@ModelAttribute Service service) {
-        if (service.getService_id() == 0) { // if service id is 0 then creating the
-            // service other updating the service
 
-            serviceService.addService(service);
+        if(service.getId()==0) {
+            // if member id = 0 then creating the
+           serviceService.addService(service);
         } else {
             serviceService.updateService(service);
         }
         return new ModelAndView("redirect:/service");
     }
 
-    @RequestMapping(value = "/deleteService", method = RequestMethod.GET)
-    public ModelAndView deleteService(HttpServletRequest request) {
-        int serviceId = Integer.parseInt(request.getParameter("service_Id"));
-        serviceService.deleteService(serviceId);
-        return new ModelAndView("redirect:/service");
-    }
-
     @RequestMapping(value = "/editService", method = RequestMethod.GET)
-    public ModelAndView editService(HttpServletRequest request) {
-        int service_Id = Integer.parseInt(request.getParameter("service_Id"));
-        Service service = serviceService.getService(service_Id);
+    public ModelAndView editService(HttpServletRequest request){
+        int serviceId = Integer.parseInt(request.getParameter("id"));
+        Service service = serviceService.getService(serviceId);
         ModelAndView model = new ModelAndView("serviceForm");
-        model.addObject("service", service);
-
+        model.addObject("service",service);
         return model;
     }
 
+    @RequestMapping(value = "/deleteService", method = RequestMethod.GET)
+    public ModelAndView deleteService(HttpServletRequest request){
+        int serviceId = Integer.parseInt(request.getParameter("id"));
+        serviceService.deleteService(serviceId);
+        return new ModelAndView("redirect:/service");
+
+
+    }
 
 }
+
+
