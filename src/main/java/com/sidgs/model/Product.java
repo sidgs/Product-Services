@@ -1,5 +1,8 @@
 package com.sidgs.model;
 
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,6 +11,7 @@ import java.io.Serializable;
  */
 
 @Entity
+@Indexed
 @Table(name ="product")
 public class Product implements Serializable{
 
@@ -21,6 +25,7 @@ public class Product implements Serializable{
     private int product_id;
 
     @Column
+    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String product_name;
 
     public int getProduct_id() {
@@ -72,7 +77,7 @@ public class Product implements Serializable{
     }
 
     @Column
-
+    @Field(index= org.hibernate.search.annotations.Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String description;
 
     @Column
@@ -82,6 +87,7 @@ public class Product implements Serializable{
     private String product_brand;
 
     @Column
+    @Field(index= Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String product_style;
 
     public int getId() {
